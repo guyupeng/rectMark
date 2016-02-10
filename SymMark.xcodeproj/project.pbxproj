@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		784B02FC1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5702.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 784B02FA1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5702.bmp */; };
+		784B02FD1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 784B02FB1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp */; };
 		786E01B51C63D11C006F2DD0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01B41C63D11C006F2DD0 /* main.m */; };
 		786E01B81C63D11C006F2DD0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01B71C63D11C006F2DD0 /* AppDelegate.m */; };
 		786E01BB1C63D11C006F2DD0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01BA1C63D11C006F2DD0 /* ViewController.m */; };
@@ -15,6 +17,7 @@
 		786E01C31C63D11C006F2DD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 786E01C11C63D11C006F2DD0 /* LaunchScreen.storyboard */; };
 		786E01CE1C63D11C006F2DD0 /* SymMarkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01CD1C63D11C006F2DD0 /* SymMarkTests.m */; };
 		786E01D91C63D11C006F2DD0 /* SymMarkUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01D81C63D11C006F2DD0 /* SymMarkUITests.m */; };
+		786E01E71C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 786E01E61C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		784B02FA1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5702.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "IMSLP05549-Btsn5702.bmp"; sourceTree = "<group>"; };
+		784B02FB1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "IMSLP05549-Btsn5703.bmp"; sourceTree = "<group>"; };
 		786E01B01C63D11C006F2DD0 /* SymMark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymMark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		786E01B41C63D11C006F2DD0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		786E01B61C63D11C006F2DD0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +56,7 @@
 		786E01D41C63D11C006F2DD0 /* SymMarkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SymMarkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		786E01D81C63D11C006F2DD0 /* SymMarkUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SymMarkUITests.m; sourceTree = "<group>"; };
 		786E01DA1C63D11C006F2DD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		786E01E61C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "IMSLP05549-Btsn5701.bmp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,9 @@
 		786E01B21C63D11C006F2DD0 /* SymMark */ = {
 			isa = PBXGroup;
 			children = (
+				784B02FA1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5702.bmp */,
+				784B02FB1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp */,
+				786E01E61C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp */,
 				786E01B61C63D11C006F2DD0 /* AppDelegate.h */,
 				786E01B71C63D11C006F2DD0 /* AppDelegate.m */,
 				786E01B91C63D11C006F2DD0 /* ViewController.h */,
@@ -244,7 +253,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				786E01C31C63D11C006F2DD0 /* LaunchScreen.storyboard in Resources */,
+				784B02FD1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp in Resources */,
+				786E01E71C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp in Resources */,
 				786E01C01C63D11C006F2DD0 /* Assets.xcassets in Resources */,
+				784B02FC1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5702.bmp in Resources */,
 				786E01BE1C63D11C006F2DD0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,8 +426,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SymMark/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.SymMark;
+				PRODUCT_BUNDLE_IDENTIFIER = com.OMR.SymMark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -425,8 +438,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SymMark/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.SymMark;
+				PRODUCT_BUNDLE_IDENTIFIER = com.OMR.SymMark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -498,6 +512,7 @@
 				786E01DF1C63D11C006F2DD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		786E01E01C63D11C006F2DD0 /* Build configuration list for PBXNativeTarget "SymMarkTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +521,7 @@
 				786E01E21C63D11C006F2DD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		786E01E31C63D11C006F2DD0 /* Build configuration list for PBXNativeTarget "SymMarkUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +530,7 @@
 				786E01E51C63D11C006F2DD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,8 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UIViewController{
+    CGPoint lastPoint;
+    CGPoint startPoint;
+    CGPoint endPoint;
+    CGPoint midPoint;
+    CGFloat red;
+    CGFloat green;
+    CGFloat blue;
+    CGFloat brush;
+    CGFloat opacity;
+    BOOL mouseSwiped;
+}
+@property (strong, nonatomic) IBOutlet UIImageView *mainImage;
+@property (strong, nonatomic) IBOutlet UIImageView *tempDrawImage;
+@property (strong, nonatomic) NSMutableArray* points;
 
 @end
 
