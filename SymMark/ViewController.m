@@ -7,20 +7,23 @@
 //
 
 #import "ViewController.h"
+#import "UIImage+MMAdditions.h"
 
-#define bmpHeight 2555.0/2.0
+
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+@synthesize backgroundImage;
 @synthesize tempDrawImage;
 @synthesize mainImage;
 @synthesize points;
 
 static NSValue* valueToStore;
 static CGPoint readCGPoint;
+static int flag;
 
 - (void)viewDidLoad {
     red = 255.0/255.0;
@@ -28,7 +31,13 @@ static CGPoint readCGPoint;
     blue = 0.0/255.0;
     brush = 2.0;
     opacity = 0.7;
+    flag = 0;
     points = [NSMutableArray new];
+    checkImageView = [UIImageView new];
+    checkImageView.frame = CGRectMake(0, 600, 768, 204.5);
+    imageName = @"TTLSTheme1.jpg";
+    
+    [backgroundImage setImage:[UIImage imageNamed:imageName]];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -42,7 +51,7 @@ static CGPoint readCGPoint;
 - (void)refreshMarks{
     UIGraphicsBeginImageContext(self.mainImage.frame.size);
     CGContextClearRect(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height));
-    
+    flag = 0;
     for (int i = 0; i< points.count/2; i++){
         CGPoint a,b;
         readCGPoint = [[points objectAtIndex:i*2] CGPointValue];
@@ -51,12 +60,23 @@ static CGPoint readCGPoint;
         b = readCGPoint;
         CGContextMoveToPoint(UIGraphicsGetCurrentContext(), a.x, a.y);
         CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), b.x, b.y);
+        
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), b.x, a.y);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), a.x, a.y);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), a.x, b.y);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), b.x, b.y);
+        
         CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
         CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
+        if (flag == 0){
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
+        }else{
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1-red, green, 1-blue, opacity);
+        }
         CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
         
         CGContextStrokePath(UIGraphicsGetCurrentContext());
+        flag = 1-flag;
     }
     
     self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
@@ -68,8 +88,37 @@ static CGPoint readCGPoint;
     [points removeLastObject];
     [points removeLastObject];
     [self refreshMarks];
-    
 }
+
+- (IBAction)checkImage:(id)sender {
+//    NSArray<NSString*>* scoreIndexContent = [[scoreArray objectAtIndex:moduleIndex] componentsSeparatedByString:@"\t"];
+//    NSString *imgName = [[MMArrangement sharedInstance].sampleKey stringByAppendingString:[NSString stringWithFormat:@"%d.jpg",scoreIndexContent[0].intValue]];
+    NSArray<NSString*> *pointStringArray = [pointsString componentsSeparatedByString:@"\n"];
+    int i = (int)(points.count/4)-1;
+    checkImageString = [NSMutableString stringWithFormat:@"1\t"];
+    [checkImageString appendString:pointStringArray[i*4]];
+    [checkImageString appendString:@"\t"];
+    [checkImageString appendString:pointStringArray[i*4+1]];
+    [checkImageString appendString:@"\t"];
+    [checkImageString appendString:pointStringArray[i*4+2]];
+    [checkImageString appendString:@"\t"];
+    [checkImageString appendString:pointStringArray[i*4+3]];
+
+    
+    NSArray<NSString*> *scoreIndexContent = [checkImageString componentsSeparatedByString:@"\t"];
+    
+    NSArray *axisArray = @[[NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[1].intValue,scoreIndexContent[2].intValue)],
+                           [NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[3].intValue,scoreIndexContent[4].intValue)],
+                           [NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[5].intValue,scoreIndexContent[6].intValue)],
+                           [NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[7].intValue,scoreIndexContent[8].intValue)]];
+    checkImageView.image =[[UIImage imageNamed:imageName] processedImage:axisArray];
+    [self.view addSubview:checkImageView];
+}
+
+- (IBAction)removeCheck:(id)sender {
+    [checkImageView removeFromSuperview];
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
@@ -92,9 +141,19 @@ static CGPoint readCGPoint;
     CGContextClearRect(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height));
     CGContextMoveToPoint(UIGraphicsGetCurrentContext(), startPoint.x, startPoint.y);
     CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+
+    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, startPoint.y);
+    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), startPoint.x, startPoint.y);
+    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), startPoint.x, currentPoint.y);
+    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
     CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
-    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
+    if (flag == 0){
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
+    }else{
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 1-red, green, 1-blue, opacity);
+    }
     CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
     
     CGContextStrokePath(UIGraphicsGetCurrentContext());
@@ -124,69 +183,65 @@ static CGPoint readCGPoint;
     [points addObject:valueToStore];
     valueToStore = [NSValue valueWithCGPoint:lastPoint];
     [points addObject:valueToStore];
-    
-    UIGraphicsBeginImageContext(self.mainImage.frame.size);
-    CGContextClearRect(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height));
-    
-    for (int i = 0; i< points.count/2; i++){
-        CGPoint a,b;
-        readCGPoint = [[points objectAtIndex:i*2] CGPointValue];
-        a = readCGPoint;
-        readCGPoint = [[points objectAtIndex:(i*2+1)] CGPointValue];
-        b = readCGPoint;
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), a.x, a.y);
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), b.x, b.y);
-        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
-        CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
-        
-        CGContextStrokePath(UIGraphicsGetCurrentContext());
-    }
-    
-    self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
-    self.tempDrawImage.image = nil;
-    UIGraphicsEndImageContext();
+
+    [self refreshMarks];
 }
 
 - (IBAction)writePoints:(id)sender {
-    float bmpRef = self.view.frame.size.height;
+    UIImage *image = [UIImage imageNamed:@"TTLSTheme1.jpg"];
+    NSLog(@"%f, %f",image.size.height,image.size.width);
+    float bmpHeight = image.size.height/2.0;
+    float bmpWidth = image.size.width/2.0;
+    float frameWidth = self.view.frame.size.width;
+    float frameHeight = self.view.frame.size.height;
+    float scale = bmpWidth/self.view.frame.size.width;
+    yOffset = (frameHeight - frameWidth*bmpHeight/bmpWidth)/2.0;
+    xOffset = 0;
+//    xOffset = (frameWidth - frameHeight*bmpWidth/bmpHeight)/2.0;
+//    yOffset = 0;
     NSString *applicationDocumentsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     //NSString *storePath = [applicationDocumentsDir stringByAppendingPathComponent:@"points.txt"];
     NSString *storePath = @"/Users/yupeng/Documents/points.txt";
-    NSMutableString *pointsString;
     pointsString = [NSMutableString new];
-//    for (int i = 0;i<points.count;i++){
-//        readCGPoint = [[points objectAtIndex:i] CGPointValue];
-//        [pointsString appendString:[NSString stringWithFormat:@"%f\t%f\n",readCGPoint.x/bmpRef,readCGPoint.y/bmpRef]];
-//    }
-    
-    for (int i = 0; i< points.count/2; i++){
-        CGPoint a,b;
-        readCGPoint = [[points objectAtIndex:i*2] CGPointValue];
-        a = readCGPoint;
-        readCGPoint = [[points objectAtIndex:(i*2+1)] CGPointValue];
-        b = readCGPoint;
-        if (fabs(a.x-b.x)<fabs(a.y-b.y)){
-            [pointsString appendString:@"stem\t"];
-            if (a.y>b.y){
-                [pointsString appendString:@"0\t"];
-            }else{
-                [pointsString appendString:@"1\t"];
-            }
-            [pointsString appendString:@"1\t"];
-            [pointsString appendString:[NSString stringWithFormat:@"%d\t%d\n",(int)(a.x/bmpRef*bmpHeight+0.5),(int)(a.y/bmpRef*bmpHeight+0.5)]];
-        }else{
-            [pointsString appendString:@"beam\t"];
-            if (a.x>b.x){
-                [pointsString appendString:@"1\t2\t"];
-                [pointsString appendString:[NSString stringWithFormat:@"%d\t%d\t%d\t%d\n",(int)(b.x/bmpRef*bmpHeight+0.5),(int)(b.y/bmpRef*bmpHeight+0.5),(int)(a.x/bmpRef*bmpHeight+0.5),(int)(a.y/bmpRef*bmpHeight+0.5)]];
-            }else{
-                [pointsString appendString:@"0\t2\t"];
-                [pointsString appendString:[NSString stringWithFormat:@"%d\t%d\t%d\t%d\n",(int)(a.x/bmpRef*bmpHeight+0.5),(int)(a.y/bmpRef*bmpHeight+0.5),(int)(b.x/bmpRef*bmpHeight+0.5),(int)(b.y/bmpRef*bmpHeight+0.5)]];
-            }
-        }
+    for (int i = 0;i<points.count;i++){
+        readCGPoint = [[points objectAtIndex:i] CGPointValue];
+        int x,y;
+        y = (int)((readCGPoint.y-yOffset)*scale+0.5);
+        x = (int)((readCGPoint.x-xOffset)*scale+0.5);
+        [pointsString appendString:[NSString stringWithFormat:@"%d\t%d\n",x*2,y*2]];
     }
+    
+//    for (int i = 0; i< points.count/2; i++){
+//        CGPoint a,b;
+//        readCGPoint = [[points objectAtIndex:i*2] CGPointValue];
+//        a = readCGPoint;
+//        readCGPoint = [[points objectAtIndex:(i*2+1)] CGPointValue];
+//        b = readCGPoint;
+//        int by,bx,ay,ax;
+//        by = (int)((b.y-yOffset)*scale+0.5);
+//        bx = (int)((b.x-xOffset)*scale+0.5);
+//        ay = (int)((a.y-yOffset)*scale+0.5);
+//        ax = (int)((a.x-xOffset)*scale+0.5);
+//        if (fabs(a.x-b.x)<fabs(a.y-b.y)){
+//            [pointsString appendString:@"stem\t"];
+//            if (a.y>b.y){
+//                [pointsString appendString:@"1\t"];
+//            }else{
+//                [pointsString appendString:@"0\t"];
+//            }
+//            [pointsString appendString:@"1\t"];
+//            [pointsString appendString:[NSString stringWithFormat:@"%d\t%d\n",ay,ax]];
+//        }else{
+//            [pointsString appendString:@"beam\t"];
+//            if (a.x>b.x){
+//                [pointsString appendString:@"1\t2\t"];
+//                [pointsString appendString:[NSString stringWithFormat:@"%d\t%d\t%d\t%d\n",by,bx,ay,ax]];
+//            }else{
+//                [pointsString appendString:@"0\t2\t"];
+//                [pointsString appendString:[NSString stringWithFormat:@"%d\t%d\t%d\t%d\n",ay,ax,by,bx]];
+//            }
+//        }
+//    }
 
     BOOL success = [pointsString writeToFile:storePath atomically:YES encoding:NSUnicodeStringEncoding error:nil];
     NSLog(@"%d",success);

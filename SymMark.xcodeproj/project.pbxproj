@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		784B02FC1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5702.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 784B02FA1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5702.bmp */; };
 		784B02FD1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 784B02FB1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp */; };
+		786644E51D1778C700837804 /* TTLSTheme1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 786644E41D1778C700837804 /* TTLSTheme1.jpg */; };
 		786E01B51C63D11C006F2DD0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01B41C63D11C006F2DD0 /* main.m */; };
 		786E01B81C63D11C006F2DD0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01B71C63D11C006F2DD0 /* AppDelegate.m */; };
 		786E01BB1C63D11C006F2DD0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01BA1C63D11C006F2DD0 /* ViewController.m */; };
@@ -18,6 +19,8 @@
 		786E01CE1C63D11C006F2DD0 /* SymMarkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01CD1C63D11C006F2DD0 /* SymMarkTests.m */; };
 		786E01D91C63D11C006F2DD0 /* SymMarkUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 786E01D81C63D11C006F2DD0 /* SymMarkUITests.m */; };
 		786E01E71C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 786E01E61C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp */; };
+		78DE419B1CCE8BC600B46FC0 /* Girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 78DE419A1CCE8BC600B46FC0 /* Girl.jpg */; };
+		78E468C71D2FECDF002DFE2E /* UIImage+MMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E468C61D2FECDF002DFE2E /* UIImage+MMAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,7 @@
 /* Begin PBXFileReference section */
 		784B02FA1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5702.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "IMSLP05549-Btsn5702.bmp"; sourceTree = "<group>"; };
 		784B02FB1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "IMSLP05549-Btsn5703.bmp"; sourceTree = "<group>"; };
+		786644E41D1778C700837804 /* TTLSTheme1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TTLSTheme1.jpg; sourceTree = "<group>"; };
 		786E01B01C63D11C006F2DD0 /* SymMark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymMark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		786E01B41C63D11C006F2DD0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		786E01B61C63D11C006F2DD0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -57,6 +61,9 @@
 		786E01D81C63D11C006F2DD0 /* SymMarkUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SymMarkUITests.m; sourceTree = "<group>"; };
 		786E01DA1C63D11C006F2DD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		786E01E61C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = "IMSLP05549-Btsn5701.bmp"; sourceTree = "<group>"; };
+		78DE419A1CCE8BC600B46FC0 /* Girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Girl.jpg; sourceTree = "<group>"; };
+		78E468C51D2FECDF002DFE2E /* UIImage+MMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MMAdditions.h"; sourceTree = "<group>"; };
+		78E468C61D2FECDF002DFE2E /* UIImage+MMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MMAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +114,10 @@
 		786E01B21C63D11C006F2DD0 /* SymMark */ = {
 			isa = PBXGroup;
 			children = (
+				78E468C51D2FECDF002DFE2E /* UIImage+MMAdditions.h */,
+				78E468C61D2FECDF002DFE2E /* UIImage+MMAdditions.m */,
+				786644E41D1778C700837804 /* TTLSTheme1.jpg */,
+				78DE419A1CCE8BC600B46FC0 /* Girl.jpg */,
 				784B02FA1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5702.bmp */,
 				784B02FB1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp */,
 				786E01E61C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp */,
@@ -252,6 +263,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				786644E51D1778C700837804 /* TTLSTheme1.jpg in Resources */,
+				78DE419B1CCE8BC600B46FC0 /* Girl.jpg in Resources */,
 				786E01C31C63D11C006F2DD0 /* LaunchScreen.storyboard in Resources */,
 				784B02FD1C6BAE9E004EA9C1 /* IMSLP05549-Btsn5703.bmp in Resources */,
 				786E01E71C63EAED006F2DD0 /* IMSLP05549-Btsn5701.bmp in Resources */,
@@ -283,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				786E01BB1C63D11C006F2DD0 /* ViewController.m in Sources */,
+				78E468C71D2FECDF002DFE2E /* UIImage+MMAdditions.m in Sources */,
 				786E01B81C63D11C006F2DD0 /* AppDelegate.m in Sources */,
 				786E01B51C63D11C006F2DD0 /* main.m in Sources */,
 			);

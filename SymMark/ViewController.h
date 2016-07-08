@@ -18,8 +18,15 @@
     CGFloat blue;
     CGFloat brush;
     CGFloat opacity;
+    CGFloat xOffset;
+    CGFloat yOffset;
     BOOL mouseSwiped;
+    NSString *imageName;
+    UIImageView *checkImageView;
+    NSMutableString *pointsString;
+    NSMutableString *checkImageString;
 }
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (strong, nonatomic) IBOutlet UIImageView *mainImage;
 @property (strong, nonatomic) IBOutlet UIImageView *tempDrawImage;
 @property (strong, nonatomic) NSMutableArray* points;
