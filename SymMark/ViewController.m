@@ -24,6 +24,7 @@
 static NSValue* valueToStore;
 static CGPoint readCGPoint;
 static int flag;
+static int currentCheckPage;
 
 - (void)viewDidLoad {
     red = 255.0/255.0;
@@ -35,7 +36,7 @@ static int flag;
     points = [NSMutableArray new];
     checkImageView = [UIImageView new];
     checkImageView.frame = CGRectMake(0, 600, 768, 204.5);
-    imageName = @"TTLSTheme1.jpg";
+    imageName = @"LeetoniaAltoSax.jpg";
     
     [backgroundImage setImage:[UIImage imageNamed:imageName]];
     
@@ -93,19 +94,66 @@ static int flag;
 - (IBAction)checkImage:(id)sender {
 //    NSArray<NSString*>* scoreIndexContent = [[scoreArray objectAtIndex:moduleIndex] componentsSeparatedByString:@"\t"];
 //    NSString *imgName = [[MMArrangement sharedInstance].sampleKey stringByAppendingString:[NSString stringWithFormat:@"%d.jpg",scoreIndexContent[0].intValue]];
+    NSMutableString *outputString = [NSMutableString new];
+    NSString *storePath = @"/Users/yupeng/Documents/points.txt";
+
     NSArray<NSString*> *pointStringArray = [pointsString componentsSeparatedByString:@"\n"];
-    int i = (int)(points.count/4)-1;
-    checkImageString = [NSMutableString stringWithFormat:@"1\t"];
-    [checkImageString appendString:pointStringArray[i*4]];
-    [checkImageString appendString:@"\t"];
-    [checkImageString appendString:pointStringArray[i*4+1]];
-    [checkImageString appendString:@"\t"];
-    [checkImageString appendString:pointStringArray[i*4+2]];
-    [checkImageString appendString:@"\t"];
-    [checkImageString appendString:pointStringArray[i*4+3]];
+    for(int i =0; i< (int)(points.count/4);i++){
+        checkImageString = [NSMutableString stringWithFormat:@"1\t"];
+        [checkImageString appendString:pointStringArray[i*4]];
+        [checkImageString appendString:@"\t"];
+        [checkImageString appendString:pointStringArray[i*4+1]];
+        [checkImageString appendString:@"\t"];
+        [checkImageString appendString:pointStringArray[i*4+2]];
+        [checkImageString appendString:@"\t"];
+        [checkImageString appendString:pointStringArray[i*4+3]];
+        [outputString appendString:checkImageString];
+        [outputString appendString:@"\n"];
+    }
+    BOOL success = [outputString writeToFile:storePath atomically:YES encoding:NSUnicodeStringEncoding error:nil];
+    NSLog(@"%d",success);
 
     
     NSArray<NSString*> *scoreIndexContent = [checkImageString componentsSeparatedByString:@"\t"];
+    
+    NSArray *axisArray = @[[NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[1].intValue,scoreIndexContent[2].intValue)],
+                           [NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[3].intValue,scoreIndexContent[4].intValue)],
+                           [NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[5].intValue,scoreIndexContent[6].intValue)],
+                           [NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[7].intValue,scoreIndexContent[8].intValue)]];
+    checkImageView.image =[[UIImage imageNamed:imageName] processedImage:axisArray];
+    [self.view addSubview:checkImageView];
+}
+
+- (IBAction)checkImageInFile:(id)sender {
+    //    NSArray<NSString*>* scoreIndexContent = [[scoreArray objectAtIndex:moduleIndex] componentsSeparatedByString:@"\t"];
+    //    NSString *imgName = [[MMArrangement sharedInstance].sampleKey stringByAppendingString:[NSString stringWithFormat:@"%d.jpg",scoreIndexContent[0].intValue]];
+    NSMutableString *outputString = [NSMutableString new];
+    NSString *storePath = @"/Users/yupeng/Documents/points.txt";
+    NSString *rPath = @"/Users/yupeng/Documents/rpoints.txt";
+    
+    NSArray<NSString*> *pointStringArray = [pointsString componentsSeparatedByString:@"\n"];
+    for(int i =0; i< (int)(points.count/4);i++){
+        checkImageString = [NSMutableString stringWithFormat:@"1\t"];
+        [checkImageString appendString:pointStringArray[i*4]];
+        [checkImageString appendString:@"\t"];
+        [checkImageString appendString:pointStringArray[i*4+1]];
+        [checkImageString appendString:@"\t"];
+        [checkImageString appendString:pointStringArray[i*4+2]];
+        [checkImageString appendString:@"\t"];
+        [checkImageString appendString:pointStringArray[i*4+3]];
+        [outputString appendString:checkImageString];
+        [outputString appendString:@"\n"];
+    }
+    if ([outputString length]>1){
+        [outputString deleteCharactersInRange:NSMakeRange([outputString length]-1, 1)];
+    }
+    BOOL success = [outputString writeToFile:storePath atomically:YES encoding:NSUnicodeStringEncoding error:nil];
+    NSLog(@"%d",success);
+
+    NSString *txtFile = [NSString stringWithContentsOfFile:rPath encoding:NSUTF8StringEncoding error:nil];
+    NSArray *imgArray = [txtFile componentsSeparatedByString:@"\n"];
+    
+    NSArray<NSString*> *scoreIndexContent = [[imgArray objectAtIndex:(currentCheckPage++)%imgArray.count] componentsSeparatedByString:@"\t"];
     
     NSArray *axisArray = @[[NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[1].intValue,scoreIndexContent[2].intValue)],
                            [NSValue valueWithCGPoint:CGPointMake(scoreIndexContent[3].intValue,scoreIndexContent[4].intValue)],
@@ -188,7 +236,7 @@ static int flag;
 }
 
 - (IBAction)writePoints:(id)sender {
-    UIImage *image = [UIImage imageNamed:@"TTLSTheme1.jpg"];
+    UIImage *image = [UIImage imageNamed:imageName];
     NSLog(@"%f, %f",image.size.height,image.size.width);
     float bmpHeight = image.size.height/2.0;
     float bmpWidth = image.size.width/2.0;
@@ -197,11 +245,14 @@ static int flag;
     float scale = bmpWidth/self.view.frame.size.width;
     yOffset = (frameHeight - frameWidth*bmpHeight/bmpWidth)/2.0;
     xOffset = 0;
-//    xOffset = (frameWidth - frameHeight*bmpWidth/bmpHeight)/2.0;
-//    yOffset = 0;
+    if (bmpHeight/bmpWidth>4.0/3.0){
+        scale = bmpHeight/self.view.frame.size.height;
+        xOffset = (frameWidth - frameHeight*bmpWidth/bmpHeight)/2.0;
+        yOffset = 0;
+    }
     NSString *applicationDocumentsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     //NSString *storePath = [applicationDocumentsDir stringByAppendingPathComponent:@"points.txt"];
-    NSString *storePath = @"/Users/yupeng/Documents/points.txt";
+//    NSString *storePath = @"/Users/yupeng/Documents/points.txt";
     pointsString = [NSMutableString new];
     for (int i = 0;i<points.count;i++){
         readCGPoint = [[points objectAtIndex:i] CGPointValue];
@@ -243,8 +294,8 @@ static int flag;
 //        }
 //    }
 
-    BOOL success = [pointsString writeToFile:storePath atomically:YES encoding:NSUnicodeStringEncoding error:nil];
-    NSLog(@"%d",success);
+//    BOOL success = [pointsString writeToFile:storePath atomically:YES encoding:NSUnicodeStringEncoding error:nil];
+//    NSLog(@"%d",success);
 }
 
 

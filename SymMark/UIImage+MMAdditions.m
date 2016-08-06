@@ -42,7 +42,19 @@
         UIImage *image3 = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([self CGImage], rect3)];
         CGContextFillRect(context, CGRectMake(rect3.origin.x - rect1.origin.x, rect3.origin.y - rect1.origin.y, rect3.size.width, rect3.size.height));
         [image3 drawAtPoint:CGPointMake(rect3.origin.x - rect1.origin.x, rect3.origin.y - rect1.origin.y) blendMode:kCGBlendModeNormal alpha:alpha];
-        
+
+        if (pt4.y < pt3.y){
+            CGRect rect4 = CGRectMake(0, pt3.y, pt2.x, pt2.y - pt3.y);
+            UIImage *image4 = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([self CGImage], rect4)];
+            CGContextFillRect(context, CGRectMake(rect4.origin.x - rect1.origin.x, rect4.origin.y - rect1.origin.y, rect4.size.width, rect4.size.height));
+            [image4 drawAtPoint:CGPointMake(rect4.origin.x - rect1.origin.x, rect4.origin.y - rect1.origin.y) blendMode:kCGBlendModeNormal alpha:alpha];
+            
+            CGRect rect5 = CGRectMake(0, 0, pt2.x, pt4.y);
+            UIImage *image5 = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([self CGImage], rect5)];
+            CGContextFillRect(context, CGRectMake(rect5.origin.x - rect1.origin.x, rect5.origin.y - rect1.origin.y, rect5.size.width, rect5.size.height));
+            [image5 drawAtPoint:CGPointMake(rect5.origin.x - rect1.origin.x, rect5.origin.y - rect1.origin.y) blendMode:kCGBlendModeNormal alpha:alpha];
+        }
+
         UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
