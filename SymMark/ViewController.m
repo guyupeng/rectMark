@@ -36,7 +36,7 @@ static int currentCheckPage;
     points = [NSMutableArray new];
     checkImageView = [UIImageView new];
     checkImageView.frame = CGRectMake(0, 600, 768, 204.5);
-    imageName = @"LeetoniaAltoSax.jpg";
+    imageName = @"LeetoniaClarinet11.jpg";
     
     [backgroundImage setImage:[UIImage imageNamed:imageName]];
     
